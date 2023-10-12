@@ -3,5 +3,7 @@
 use App\QueryBuilder;
 
 $db = new QueryBuilder();
-$posts = $db->getAll('posts');
-var_dump($posts);
+
+$db->update([
+    'title' => 'new title 22'
+], 3, 'posts');

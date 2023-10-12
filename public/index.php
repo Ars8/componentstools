@@ -2,8 +2,14 @@
 
 require '../vendor/autoload.php';
 
-if($_SERVER['REQUEST_URI'] == 'home') {
-    require '../app/controllers/homepage.php';
-}
+use App\QueryBuilder;
 
-exit;
+$db = new QueryBuilder();
+d($db);
+var_dump(get_class_methods($db));
+
+// Create new Plates instance
+//$templates = new League\Plates\Engine('../app/views');
+
+// Render a template
+//echo $templates->render('about', ['title' => 'Jonathan']);

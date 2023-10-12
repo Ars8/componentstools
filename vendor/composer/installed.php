@@ -28,5 +28,23 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'kint-php/kint' => array(
+            'pretty_version' => '5.0.7',
+            'version' => '5.0.7.0',
+            'reference' => 'a700653a77250b122920799b10c94e904c9b78c7',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../kint-php/kint',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
+        'league/plates' => array(
+            'pretty_version' => 'v3.5.0',
+            'version' => '3.5.0.0',
+            'reference' => 'a6a3238e46c6e19af7318fdc36bfbe49b0620231',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../league/plates',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
     ),
 );
