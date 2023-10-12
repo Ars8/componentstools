@@ -2,11 +2,8 @@
 
 require '../vendor/autoload.php';
 
-use Aura\SqlQuery\QueryFactory;
+if($_SERVER['REQUEST_URI'] == 'home') {
+    require '../app/controllers/homepage.php';
+}
 
-$queryFactory = new QueryFactory('mysql');
-$select = $queryFactory->newSelect();
-
-var_dump($queryFactory);
-
-echo 123;
+exit;
