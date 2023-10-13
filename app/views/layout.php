@@ -4,8 +4,8 @@
   </head>
     <nav>
         <ul>
-            <li><a href="/">Homepage</a></li>
-            <li><a href="/about">About</a></li>
+            <li><a href="/componentstools/home">Homepage</a></li>
+            <li><a href="/componentstools/about">About</a></li>
         </ul>
     </nav>
     <?=$this->section('content')?>
