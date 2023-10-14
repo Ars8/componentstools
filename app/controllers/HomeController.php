@@ -2,29 +2,88 @@
 
 namespace App\controllers;
 
+use App\exceptions\AccountIsBlockedException;
+use App\exceptions\NotEnoughMoneyException;
 use App\QueryBuilder;
+use Exception;
 use League\Plates\Engine;
+use PDO;
+
+use function Tamtamchik\SimpleFlash\flash;
 
 class HomeController
 {
 
     private $templates;
+    private $auth;
 
     public function __construct()
     {
         $this->templates = new Engine('../app/views');
+        $db = new PDO("mysql:host=localhost;dbname=app3;charset=utf8;", "root", "root");
+        $this->auth = new \Delight\Auth\Auth($db);
     }
 
     public function index($vars)
     {
+        d($this->auth->getUsername());die;
         $db = new QueryBuilder();
 
         $posts = $db->getAll('posts');
         echo $this->templates->render('homepage', ['postsInView' => $posts]);
     }
 
-    public function about($vars)
+    public function about()
     {
-        echo $this->templates->render('about', ['name' => 'Jonathan about page']);
+
+        try {
+            $userId = $this->auth->register('rahim@marlindev23.ru', '12323', 'Rahim23', function ($selector, $token) {
+                echo 'Send ' . $selector . ' and ' . $token . ' to the user (e.g. via email)';
+            });
+
+            echo 'We have signed up a new user with the ID ' . $userId;
+        } catch (\Delight\Auth\InvalidEmailException $e) {
+            die('Invalid email address');
+        } catch (\Delight\Auth\InvalidPasswordException $e) {
+            die('Invalid password');
+        } catch (\Delight\Auth\UserAlreadyExistsException $e) {
+            die('User already exists');
+        } catch (\Delight\Auth\TooManyRequestsException $e) {
+            die('Too many requests');
+        }
+    }
+
+    public function email_verification()
+    {
+        try {
+            $this->auth->confirmEmail('YmveiZ1XBYUGVGTh', 'thSsRPRwqRjUTCh1');
+
+            echo 'Email address has been verified';
+        } catch (\Delight\Auth\InvalidSelectorTokenPairException $e) {
+            die('Invalid token');
+        } catch (\Delight\Auth\TokenExpiredException $e) {
+            die('Token expired');
+        } catch (\Delight\Auth\UserAlreadyExistsException $e) {
+            die('Email address already exists');
+        } catch (\Delight\Auth\TooManyRequestsException $e) {
+            die('Too many requests');
+        }
+    }
+
+    public function login()
+    {
+        try {
+            $this->auth->login('rahim@marlindev2.ru', '1232');
+
+            echo 'User is logged in';
+        } catch (\Delight\Auth\InvalidEmailException $e) {
+            die('Wrong email address');
+        } catch (\Delight\Auth\InvalidPasswordException $e) {
+            die('Wrong password');
+        } catch (\Delight\Auth\EmailNotVerifiedException $e) {
+            die('Email not verified');
+        } catch (\Delight\Auth\TooManyRequestsException $e) {
+            die('Too many requests');
+        }
     }
 }

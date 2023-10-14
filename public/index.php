@@ -8,6 +8,8 @@
     $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
         $r->addRoute('GET', '/componentstools/home', ['App\controllers\HomeController', 'index']);
         $r->addRoute('GET', '/componentstools/about', ['App\controllers\HomeController', 'about']);
+        $r->addRoute('GET', '/componentstools/verification', ['App\controllers\HomeController', 'email_verification']);
+        $r->addRoute('GET', '/componentstools/login', ['App\controllers\HomeController', 'login']);
     });
     
     // Fetch method and URI from somewhere
