@@ -26,7 +26,16 @@ class HomeController
 
     public function index($vars)
     {
-        d($this->auth->getUsername());die;
+        //$this->auth->login('rahim@marlindev2.ru', '1232');die;
+        //$this->auth->logout();die;
+        d($this->auth->getRoles());die;
+        try {
+            $this->auth->admin()->addRoleForUserById(1, \Delight\Auth\Role::ADMIN);
+        }
+        catch (\Delight\Auth\UnknownIdException $e) {
+            die('Unknown user ID');
+        }
+        
         $db = new QueryBuilder();
 
         $posts = $db->getAll('posts');

@@ -82,6 +82,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'eoghanobrien/php-simple-mail' => array(
+            'pretty_version' => '1.7.1',
+            'version' => '1.7.1.0',
+            'reference' => '9b8d4c01c7c0cac769ba42ccd08a73ecee855825',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../eoghanobrien/php-simple-mail',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'illuminate/collections' => array(
             'pretty_version' => 'v8.83.27',
             'version' => '8.83.27.0',
