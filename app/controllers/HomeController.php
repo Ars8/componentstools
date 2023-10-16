@@ -8,7 +8,7 @@ use App\QueryBuilder;
 use Exception;
 use League\Plates\Engine;
 use PDO;
-
+use Delight\Auth\Auth;
 use function Tamtamchik\SimpleFlash\flash;
 
 class HomeController
@@ -16,21 +16,23 @@ class HomeController
 
     private $templates;
     private $auth;
+    private $qb;
 
-    public function __construct()
+    public function __construct(QueryBuilder $qb, Engine $engine, Auth $auth)
     {
-        $this->templates = new Engine('../app/views');
-        $db = new PDO("mysql:host=localhost;dbname=app3;charset=utf8;", "root", "root");
-        $this->auth = new \Delight\Auth\Auth($db);
+        $this->qb = $qb;
+        $this->templates = $engine;
+        $this->auth = $auth;
     }
 
-    public function index($vars)
+    public function index()
     {
+        d($this->auth);die;
         //$this->auth->login('rahim@marlindev2.ru', '1232');die;
         //$this->auth->logout();die;
         d($this->auth->getRoles());die;
         try {
-            $this->auth->admin()->addRoleForUserById(1, \Delight\Auth\Role::ADMIN);
+            $this->auth->admin()->addRoleForUserById(1, \Delight\Auth\Role::ADMIN);   //will refactor
         }
         catch (\Delight\Auth\UnknownIdException $e) {
             die('Unknown user ID');
